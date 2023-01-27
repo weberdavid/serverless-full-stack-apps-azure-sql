@@ -24,6 +24,7 @@ LOGIC_APP_URL: str = os.environ.get("LogicAppUrl", "")
 
 def main(GetBusData: func.TimerRequest) -> None:
     """Retrieve the routes we want to monitor from the SQL Database"""
+    logging.info(f"Conn String is: {AZURE_CONN_STRING}")
     conn: str = pyodbc.connect(AZURE_CONN_STRING)
     monitored_routes: list[int] = get_monitored_routes(conn)
     logging.info(f"{len(monitored_routes)} routes to check against")
